@@ -1,5 +1,9 @@
 load test_helper/static.bash
 
+setup() {
+  make -C docs -b clean
+}
+
 @test "jsonlint" {
   run yarn jsonlint
   print_errors
@@ -19,13 +23,13 @@ load test_helper/static.bash
 }
 
 @test "shellcheck" {
-  run bash -e scripts/shellcheck.sh
+  run bash -e scripts/src/shellcheck.sh
   print_errors
   [ "$status" -eq 0 ]
 }
 
 @test "shfmt" {
-  run bash -e scripts/shfmt.sh
+  run bash -e scripts/src/shfmt.sh
   print_errors
   [ "$status" -eq 0 ]
 }
@@ -55,13 +59,13 @@ load test_helper/static.bash
 }
 
 @test "stylelint" {
-  run bash -e scripts/stylelint.sh
+  run bash -e scripts/src/stylelint.sh
   print_errors
   [ "$status" -eq 0 ]
 }
 
 @test "v8r" {
-  run bash -e scripts/v8r.sh
+  run bash -e scripts/src/v8r.sh
   print_errors
   [ "$status" -eq 0 ]
 }
@@ -91,7 +95,7 @@ load test_helper/static.bash
 }
 
 @test "sphinx doctest and linkcheck" {
-  run bash -e scripts/sphinx_test.sh
+  run bash -e scripts/src/sphinx_test.sh
   print_errors
   [ "$status" -eq 0 ]
 }
